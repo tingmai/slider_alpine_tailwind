@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.2/dist/cdn.min.js"></script>
+</head>
+<body>
+
+    <div class="p-16">
+        <div class="max-w-4xl mx-auto relative" x-data="{
+            activeSlide:1,
+            slides:[
+              {id:1,name:'Americano',price:3500,photo:'img/pic1.png'},
+              {id:2,name:'Coffee Latte',price:4500,photo:'img/pic2.png'},
+              {id:3,name:'Cappuccino',price:5500,photo:'img/pic3.png'},
+              {id:4,name:'Expresso',price:3000,photo:'img/pic4.png'},
+              {id:5,name:'Irish Coffee',price:4500,photo:'img/pic5.png'}
+            ],
+            loop(){
+                setInterval(()=>{this.activeSlide=this.activeSlide==5 ? 1 : this.activeSlide + 1},3000)
+            }
+        }" x-init="loop">
+            <template x-for="slide in slides" :key="slide.id">
+                <div x-show="activeSlide==slide.id" class="px-24 py-10 h-80 flex space-x-48 item-center bg-slate-500 text-white rounded-lg">
+                     <div class="flex-col item-center space-y-4">
+                        <h2 class="text-2xl font-bold pt-10" x-text="slide.name"></h2>
+                        <h3 x-text="slide.price"></h3>
+                        <button type="button" class="bg-orange-500 hover:bg-orange-800 hover:drop-shadow-lg inline-flex items-center justify-center p-5 mt-5 rounded-md group-hover:from-purple-600 group-hover:to-blue-500 bg-gradient-to-br hover:text-white"> 
+                            <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
+                                <path fill-rule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clip-rule="evenodd"/>
+                              </svg>
+                            More Details 
+                        
+                        </button>
+                     </div>
+                     <div class="mx-200">
+                        <img :src="`${slide.photo}`" class="h-auto max-w-full rounded-lg" style="width:300px;"/>
+                     </div>
+
+
+                </div>
+            </template>
+        </div>
+    </div>
+    
+</body>
+</html>
